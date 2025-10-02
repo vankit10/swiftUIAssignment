@@ -46,6 +46,20 @@ struct FavoritesView: View {
                         }
                     }
                     .edgesIgnoringSafeArea(.all)
+                }else{
+                    Spacer()
+                       VStack {
+                           Image(systemName: "tray")
+                               .resizable()
+                               .frame(width: 80, height: 80)
+                               .foregroundColor(.gray)
+                               .padding(.bottom)
+                           Text("No favorite posts found.")
+                               .font(.headline)
+                               .foregroundColor(.gray)
+                          
+                       }
+                       Spacer()
                 }
             }
         }

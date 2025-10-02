@@ -22,7 +22,7 @@ struct PostViewScreen: View {
     var body: some View {
         VStack {
             HeaderView(title: "All posts")
-            if posts.count != 0{
+            
                 VStack(alignment: .leading) {
                     TextField("Search by title...", text: $searchText)
                         .padding(.horizontal, 12)
@@ -37,6 +37,7 @@ struct PostViewScreen: View {
                 }
 //                .padding(6)
                 .background(.darkgray)
+            if posts.count != 0{
                 List {
                     ForEach(posts, id: \.id) { post in
                         NavigationLink(destination: PostDetailView(post: post)) {
@@ -63,6 +64,24 @@ struct PostViewScreen: View {
                     fetchPosts()
                 }
                 .edgesIgnoringSafeArea(.all)
+            }else{
+                Spacer()
+                   VStack {
+                       Image(systemName: "tray")
+                           .resizable()
+                           .frame(width: 80, height: 80)
+                           .foregroundColor(.gray)
+                           .padding(.bottom)
+                       Text("No posts found.")
+                           .font(.headline)
+                           .foregroundColor(.gray)
+                       if !searchText.isEmpty {
+                           Text("Try clearing the search or refresh.")
+                               .font(.subheadline)
+                               .foregroundColor(.gray)
+                       }
+                   }
+                   Spacer()
             }
         }
         .background(.darkgray)
